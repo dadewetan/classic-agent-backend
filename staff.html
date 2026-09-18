@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Classic — Staff inquiries</title>
+<style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:0 20px;color:#182634}button{padding:10px 18px;cursor:pointer}article{border:1px solid #ddd;border-radius:8px;padding:20px;margin:15px 0}dt{font-weight:600}dd{margin:0 0 8px;overflow-wrap:anywhere}#status{margin:20px 0}</style>
+<h1>Customer inquiries</h1><p>Latest 200 records. Test deployment: use fictional customer details only.</p><button id="refresh">Refresh</button> <a href="/">Website</a><p>Close all browser windows on shared computers after viewing records; your browser may retain this sign-in.</p><div id="status" role="status"></div><div id="records"></div>
+<script>
+async function load(){
+ const status=document.getElementById('status'),records=document.getElementById('records');
+ status.textContent='Loading…';records.replaceChildren();
+ try {
+  const res=await fetch('/staff/leads',{cache:'no-store'});if(!res.ok)throw new Error('Could not load records. Sign in again or retry.');
+  const data=await res.json();status.textContent=data.length?`${data.length} inquiries`:'No inquiries yet.';
+  for(const lead of data){
+   const item=document.createElement('article'),title=document.createElement('h2'),meta=document.createElement('p'),details=document.createElement('dl');
+   title.textContent=lead.fields?.name || 'Inquiry';meta.textContent=`${lead.type} · ${lead.stage} · ${new Date(lead.created_at).toLocaleString()} · ${lead.id}`;
+   for(const [key,value] of Object.entries(lead.fields || {})){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key.replaceAll('_',' ');dd.textContent=String(value);details.append(dt,dd);}
+   item.append(title,meta,details);records.append(item);
+  }
+ }catch(e){status.textContent=e.message;}
+}
+document.getElementById('refresh').onclick=load;load();
+</script></html>

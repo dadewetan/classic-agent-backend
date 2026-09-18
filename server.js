@@ -13,7 +13,7 @@ const app = express();
 app.disable('x-powered-by');
 const origins = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
 app.use(cors({ origin: (origin, cb) => cb(null, Boolean(origin && origins.includes(origin))) }));
-app.get('/', (req, res) => res.json({ service: 'Classic Agent Backend', health: '/health' }));
+require('./website-routes')(app, pool);
 app.get('/health', async (req, res) => {
   try {
     await pool.query('SELECT id FROM leads LIMIT 0');

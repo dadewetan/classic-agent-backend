@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classic Insurance Agency & Tags and Title</title>
+<meta name="description" content="Auto, commercial, home/rent and life insurance, plus Maryland vehicle registration and titling — serving Prince George's County, MD for over 30 years.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#182634; --cream:#F1ECE0; --paper:#FBF8F1; --charcoal:#2A2622;
+    --steel:#3D6E8E; --steel-dark:#2C5169;
+    --brass:#A8792A; --brass-dark:#7E5A1E;
+    --green:#3d7a4f; --line: rgba(24,38,52,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--cream); color:var(--charcoal); font-family:'Source Serif 4', serif;}
+  section[id]{scroll-margin-top:74px;}
+  .skip-link{position:absolute; left:-9999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:100; font-family:'Barlow Condensed', sans-serif; font-weight:600; border-radius:0 0 6px 0;}
+  .skip-link:focus{left:0;}
+  h1,h2,h3{font-family:'Barlow Condensed', sans-serif; color:var(--ink);}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+  .pill-btn{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:15px; border:1.5px solid var(--ink); background:var(--ink); color:#fff; padding:10px 18px; border-radius:24px; cursor:pointer; transition:transform .15s ease, opacity .15s ease;}
+  .pill-btn:hover{transform:translateY(-1px); opacity:0.92;}
+  .pill-btn.secondary{background:transparent; color:var(--ink);}
+  .pill-btn.secondary:hover{background:rgba(24,38,52,0.06);}
+  .pill-btn.brass{background:var(--brass); border-color:var(--brass);}
+  .pill-btn.steel{background:var(--steel-dark); border-color:var(--steel-dark);}
+
+  /* ---------- nav ---------- */
+  .site-nav{position:sticky; top:0; z-index:30; background:var(--cream); border-bottom:2px solid var(--ink); transition:box-shadow .2s ease;}
+  .site-nav.scrolled{box-shadow:0 6px 16px rgba(24,38,52,0.08);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; flex-wrap:wrap;}
+  .brand{font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:19px; color:var(--ink);}
+  .nav-links{display:flex; gap:20px; font-family:'Barlow Condensed', sans-serif; font-size:14.5px; font-weight:600;}
+  .nav-links a{text-decoration:none; color:#5b5349; padding-bottom:3px; border-bottom:2px solid transparent; transition:color .15s ease, border-color .15s ease;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ink); border-bottom-color:var(--brass);}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-phone{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:14.5px; color:var(--ink); text-decoration:none;}
+  .nav-toggle{display:none; background:none; border:1.5px solid var(--ink); border-radius:6px; padding:7px 10px; cursor:pointer; font-size:16px; color:var(--ink);}
+  @media (max-width:760px){
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; background:var(--cream); flex-direction:column; gap:0; border-bottom:2px solid var(--ink); padding:6px 24px 14px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{border-bottom:1px solid var(--line); padding:12px 0;}
+    .nav-toggle{display:inline-block;}
+    .nav-phone{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 40px; max-width:640px;}
+  @media (max-width:760px){ .hero{padding:40px 0 30px;} }
+  .eyebrow{font-family:'Barlow Condensed', sans-serif; font-size:13px; font-weight:600; color:var(--brass-dark); letter-spacing:0.4px;}
+  .hero h1{font-size:clamp(30px,5vw,46px); font-weight:700; line-height:1.08; margin:8px 0 14px;}
+  .hero p{font-size:16.5px; color:#5b5349; max-width:52ch; margin:0 0 22px;}
+  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* ---------- services ---------- */
+  .section{padding:52px 0; border-top:1px solid var(--line);}
+  .section-head{margin-bottom:28px;}
+  .section-head .eyebrow{display:block; margin-bottom:6px;}
+  .section-head h2{font-size:28px; margin:0 0 8px;}
+  .section-head p{color:#5b5349; margin:0; max-width:60ch;}
+
+  .svc-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:700px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-card{background:var(--paper); border:1px solid var(--line); border-radius:10px 10px 4px 4px; overflow:hidden; transition:transform .18s ease, box-shadow .18s ease;}
+  .svc-card:hover{transform:translateY(-3px); box-shadow:0 12px 26px rgba(24,38,52,0.1);}
+  .svc-card .awning{height:8px;}
+  .svc-card.insurance .awning{background:var(--steel);} .svc-card.tags .awning{background:var(--brass);}
+  .svc-card .body{padding:24px 22px;}
+  .svc-card h3{font-size:22px; margin:0 0 8px;}
+  .svc-card ul{margin:0 0 18px; padding-left:18px; font-size:14.5px; color:#5b5349; line-height:1.7;}
+  .svc-card button{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:14.5px; border:none; color:#fff; padding:9px 16px; border-radius:6px; cursor:pointer; transition:opacity .15s ease;}
+  .svc-card button:hover{opacity:0.88;}
+  .svc-card.insurance button{background:var(--steel-dark);} .svc-card.tags button{background:var(--brass-dark);}
+
+  /* ---------- trust strip ---------- */
+  .trust-strip{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; padding:22px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .trust-item{display:flex; align-items:center; gap:10px; font-size:14px; color:#5b5349; flex:1; min-width:180px;}
+  .trust-item svg{flex-shrink:0; color:var(--brass-dark);}
+
+  /* ---------- dealers ---------- */
+  .dealer-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  @media (max-width:760px){ .dealer-grid{grid-template-columns:1fr;} }
+  .dealer-pitch ul{padding-left:18px; font-size:14.5px; color:#5b5349; line-height:1.8;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:520px){ .form-grid{grid-template-columns:1fr;} }
+  .field{display:flex; flex-direction:column; gap:5px; margin-bottom:14px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-family:'Barlow Condensed', sans-serif; font-size:13px; color:#5b5349;}
+  .field input, .field select, .field textarea{border:1px solid var(--line); border-radius:7px; padding:10px 12px; font-family:'Source Serif 4', serif; font-size:15px; background:var(--paper); transition:border-color .15s ease;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--steel); outline-offset:1px; border-color:var(--steel);}
+  .field input.invalid, .field textarea.invalid{border-color:#b3452c; background:#fdf3f0;}
+  button:focus-visible, a:focus-visible{outline:2px solid var(--steel); outline-offset:2px;}
+  .note-ok{font-size:13px; color:var(--green); font-weight:600;}
+  .form-error{display:none; margin-top:10px; font-size:13px; color:#b3452c;}
+
+  /* ---------- about / contact ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:700px){ .about-grid{grid-template-columns:1fr;} }
+  .about-item{background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px 18px; font-size:14.5px; color:#5b5349;}
+  .about-item strong{color:var(--ink); display:block; margin-bottom:4px; font-family:'Barlow Condensed', sans-serif; font-size:15px;}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start;}
+  @media (max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-info div{margin-bottom:14px; font-size:15px;}
+  .contact-info .k{font-family:'Barlow Condensed', sans-serif; color:#7a7167; font-size:13px; display:block;}
+  .map-box{background:var(--paper); border-radius:10px; height:220px; width:100%; display:block;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink); color:#c8cdd3; padding:34px 0 20px; margin-top:20px;}
+  .foot-grid{display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; margin-bottom:20px;}
+  .foot-col h4{font-family:'Barlow Condensed', sans-serif; color:#fff; font-size:14px; margin:0 0 10px;}
+  .foot-col a{display:block; font-size:13.5px; color:#c8cdd3; text-decoration:none; margin-bottom:6px; cursor:pointer;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.15); padding-top:14px; font-size:12.5px; color:#8b93a0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  /* ---------- floating chat launcher ---------- */
+  .fab{position:fixed; bottom:22px; right:22px; z-index:40; background:var(--brass); color:#fff; border:none; border-radius:30px; padding:13px 20px; font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:15px; box-shadow:0 8px 20px rgba(24,38,52,0.25); cursor:pointer; display:flex; align-items:center; gap:8px; transition:transform .15s ease, background .15s ease;}
+  .fab:hover{background:var(--brass-dark); transform:translateY(-2px);}
+
+  /* ---------- drawer ---------- */
+  .drawer-backdrop{position:fixed; inset:0; background:rgba(24,38,52,0.45); z-index:45; opacity:0; pointer-events:none; transition:opacity .2s ease;}
+  .drawer-backdrop.open{opacity:1; pointer-events:auto;}
+  .agent-drawer{position:fixed; top:0; right:0; height:100%; width:420px; max-width:92vw; background:var(--cream); z-index:46; box-shadow:-10px 0 30px rgba(0,0,0,0.2); transform:translateX(100%); transition:transform .25s ease; display:flex; flex-direction:column;}
+  .agent-drawer.open{transform:translateX(0);}
+  .drawer-header{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; border-bottom:2px solid var(--ink); flex-shrink:0;}
+  .drawer-header span{font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:17px; color:var(--ink);}
+  .drawer-close{background:none; border:none; font-size:18px; cursor:pointer; color:var(--ink);}
+  .drawer-body{flex:1; overflow-y:auto; padding:18px;}
+  .view{display:none;} .view.active{display:block;}
+
+  .picker-btn{display:flex; align-items:center; justify-content:space-between; width:100%; background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin-bottom:10px; cursor:pointer; font-family:'Source Serif 4', serif; font-size:15.5px; text-align:left;}
+  .picker-btn .arrow{font-family:'Barlow Condensed', sans-serif; font-weight:600;}
+
+  .stepper{display:flex; gap:6px; margin-bottom:18px;}
+  .step{flex:1; text-align:center; font-family:'Barlow Condensed', sans-serif; font-size:11.5px; font-weight:600; color:#a39a8d; padding-bottom:7px; border-bottom:3px solid var(--line);}
+  .step.done{color:var(--ink); border-bottom-color:var(--ink);}
+  .step.active{color:var(--brass-dark); border-bottom-color:var(--brass);}
+
+  .chat-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .back-btn{background:none; border:none; cursor:pointer; font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:14px; color:var(--ink); padding:4px 0;}
+  .section-badge{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:13px; padding:4px 11px; border-radius:20px; color:#fff;}
+  .section-badge.insurance{background:var(--steel);} .section-badge.tags{background:var(--brass);}
+  .disclaimer{font-size:12px; color:#7a7167; border:1px dashed var(--line); background:rgba(255,255,255,0.5); padding:8px 10px; border-radius:6px; margin-bottom:12px; line-height:1.5;}
+  .chat-window{background:var(--paper); border:1px solid var(--line); border-radius:10px; height:320px; display:flex; flex-direction:column; overflow:hidden;}
+  .messages{flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:9px;}
+  .msg{max-width:86%; padding:9px 12px; border-radius:12px; font-size:14.5px; line-height:1.5; animation:rise .2s ease;}
+  @keyframes rise{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  .msg.agent{align-self:flex-start; background:#fff; border:1px solid var(--line); border-bottom-left-radius:3px;}
+  .msg.user{align-self:flex-end; color:#fff; border-bottom-right-radius:3px;}
+  #chatScreen.insurance .msg.user{background:var(--steel);} #chatScreen.tags .msg.user{background:var(--brass);}
+  .typing{align-self:flex-start; font-size:12.5px; color:#8a8175; font-family:'Barlow Condensed', sans-serif;}
+  .input-row{display:flex; gap:8px; padding:10px; border-top:1px solid var(--line); background:#fff;}
+  .input-row input{flex:1; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-family:'Source Serif 4', serif; font-size:14.5px; background:var(--cream);}
+  .input-row button{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:14.5px; border:none; color:#fff; padding:0 16px; border-radius:8px; cursor:pointer;}
+  #chatScreen.insurance .input-row button{background:var(--steel-dark);} #chatScreen.tags .input-row button{background:var(--brass-dark);}
+  .input-row button:disabled{opacity:0.5;}
+
+  #leadCard{display:none; margin-top:14px; background:#fff; border:1px solid var(--line); border-left:4px solid var(--ink); border-radius:6px; padding:14px 16px;}
+  #leadCard h4{font-size:15px; margin:0 0 8px; color:var(--ink);}
+  #leadFields{font-size:13.5px; line-height:1.6;}
+  #leadFields div{display:flex; gap:6px;}
+  #leadFields .k{color:#7a7167; min-width:110px; flex-shrink:0;}
+  .btn-row{margin-top:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .btn{font-family:'Barlow Condensed', sans-serif; font-weight:600; font-size:13.5px; border:none; border-radius:6px; padding:8px 14px; cursor:pointer; color:#fff; background:var(--ink);}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink);}
+  .btn:disabled{opacity:0.45; cursor:default;}
+
+  .checklist{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:14px 16px;}
+  .checklist label{display:flex; align-items:flex-start; gap:9px; font-size:14.5px; padding:8px 0; border-bottom:1px solid var(--line);}
+  .checklist label:last-child{border-bottom:none;}
+
+  .pay-card{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:22px; text-align:center;}
+  .pay-amount{font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; color:var(--ink); margin:4px 0;}
+  .pay-sub{font-size:13px; color:#7a7167; margin-bottom:16px;}
+  .hosted-mock{border:1px solid var(--line); background:#fff; border-radius:8px; padding:14px; margin:0 auto 16px; font-size:12.5px; color:#7a7167;}
+
+  /* ---------- service picker modal (above everything) ---------- */
+  .modal-overlay{display:none; position:fixed; inset:0; background:rgba(24,38,52,0.6); z-index:60; align-items:center; justify-content:center; padding:20px;}
+  .modal-overlay.active{display:flex;}
+  .modal-box{background:var(--paper); border-radius:12px; max-width:400px; width:100%; padding:24px 22px; box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+  .modal-box h3{margin:0 0 4px; font-size:20px;}
+  .modal-box .modal-sub{font-size:13px; color:#7a7167; margin:0 0 16px;}
+  .service-option{display:flex; align-items:center; justify-content:space-between; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:11px 13px; margin-bottom:8px; cursor:pointer; font-family:'Source Serif 4', serif; font-size:14.5px; color:var(--charcoal);}
+  .service-option.muted{background:transparent; border-style:dashed; color:#7a7167;}
+  .modal-close{background:none; border:none; font-size:13px; color:#7a7167; cursor:pointer; margin-top:6px; font-family:'Barlow Condensed', sans-serif;}
+
+  /* ---------- admin overlay ---------- */
+  .admin-note{font-size:12.5px; color:#7a7167; border:1px dashed var(--line); padding:8px 12px; border-radius:6px; margin-bottom:14px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th, td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);}
+  th{font-family:'Barlow Condensed', sans-serif; color:#7a7167; font-weight:600;}
+  .tag{font-family:'Barlow Condensed', sans-serif; font-size:11px; font-weight:600; padding:2px 8px; border-radius:10px; color:#fff;}
+  .tag.new{background:#8a8175;} .tag.onboarding_complete{background:var(--steel);} .tag.paid{background:var(--green);}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ===================== NAV ===================== -->
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <div class="brand">Classic Insurance Agency &amp; Tags and Title</div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Insurance</a>
+      <a href="#services">Tags &amp; Title</a>
+      <a href="#dealers">Dealerships</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+13016993344" class="nav-phone">(301) 699-3344</a>
+      <button class="pill-btn" onclick="startFlow('insurance')">Get a quote</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleNav()">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- ===================== HERO ===================== -->
+<section class="wrap hero">
+  <div>
+    <span class="eyebrow">Bladensburg · Prince George's County, MD</span>
+    <h1>Better coverage, faster paperwork.</h1>
+    <p>Auto, commercial, home/rent and life insurance, plus Maryland vehicle registration and titling.</p>
+    <div class="hero-ctas">
+      <button class="pill-btn steel" onclick="startFlow('insurance')">Get an insurance quote</button>
+      <button class="pill-btn brass" onclick="startFlow('tags')">Tags &amp; Title help</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap trust-strip">
+  <div class="trust-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>
+    Licensed &amp; compliant — MIA and MVA
+  </div>
+  <div class="trust-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+    Real agent follow-up within 1 business day
+  </div>
+  <div class="trust-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Family-run, not a call center
+  </div>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="section wrap" id="services">
+  <div class="section-head">
+    <span class="eyebrow">What we offer</span>
+    <h2>Two windows, one agency</h2>
+    <p>Whichever you're here for, we'll get the right questions asked up front instead of back-and-forth emails.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card insurance">
+      <div class="awning"></div>
+      <div class="body">
+        <h3>Insurance</h3>
+        <ul>
+          <li>Auto, home &amp; renters, life</li>
+          <li>Commercial: general liability, bonding, commercial auto</li>
+          <li>We shop multiple carriers for you</li>
+        </ul>
+        <button onclick="startFlow('insurance')">Start an insurance chat</button>
+      </div>
+    </div>
+    <div class="svc-card tags">
+      <div class="awning"></div>
+      <div class="body">
+        <h3>Tags &amp; Title</h3>
+        <ul>
+          <li>New &amp; temporary registration</li>
+          <li>Tag renewals, returns &amp; duplicates</li>
+          <li>Title-only, dealer &amp; fleet work</li>
+        </ul>
+        <button onclick="startFlow('tags')">Start a tags &amp; title chat</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEALERS ===================== -->
+<section class="section wrap" id="dealers">
+  <div class="section-head">
+    <span class="eyebrow">For dealerships</span>
+    <h2>Partner with us for titling</h2>
+    <p>A dedicated line for dealer titling and registration, plus insurance referral partnerships for your buyers.</p>
+  </div>
+  <div class="dealer-grid">
+    <div class="dealer-pitch">
+      <ul>
+        <li>Fast turnaround on title &amp; registration paperwork</li>
+        <li>One contact for every deal, not a call queue</li>
+        <li>Optional insurance referral revenue share</li>
+        <li>Works alongside your existing F&amp;I process</li>
+      </ul>
+    </div>
+    <div>
+      <div class="form-grid">
+        <div class="field"><label>Dealership name *</label><input id="dName" placeholder="e.g. Main Street Motors"></div>
+        <div class="field"><label>Contact name *</label><input id="dContact" placeholder="Your name"></div>
+        <div class="field"><label>Phone *</label><input id="dPhone" type="tel" placeholder="(301) 555-0100"></div>
+        <div class="field"><label>Email *</label><input id="dEmail" type="email" placeholder="you@dealership.com"></div>
+        <div class="field"><label>Vehicles sold per month (approx.)</label>
+          <select id="dVolume"><option>1–10</option><option>11–30</option><option>31–75</option><option>75+</option></select>
+        </div>
+        <div class="field full"><label>What are you hoping for?</label><textarea id="dMessage" rows="3"></textarea></div>
+      </div>
+      <button class="pill-btn brass" onclick="submitDealer()">Send inquiry</button>
+      <div id="dealerSent" style="display:none; margin-top:12px;" class="note-ok">✓ Your inquiry was saved. Thank you.</div>
+      <div id="dealerError" class="form-error"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section wrap" id="about">
+  <div class="section-head">
+    <span class="eyebrow">Who we are</span>
+    <h2>Family-run, locally licensed</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-item"><strong>Insurance licensing</strong>Producer-licensed through the Maryland Insurance Administration (MIA). Binding coverage is always confirmed by a licensed agent.</div>
+    <div class="about-item"><strong>Tags &amp; Title licensing</strong>Title services regulated by the Maryland MVA. Some transactions require an in-person visit or notarization.</div>
+    <div class="about-item"><strong>Business registration</strong>Incorporated in Bladensburg, MD, filed through the Maryland Dept. of Assessments &amp; Taxation (SDAT).</div>
+    <div class="about-item"><strong>30+ years local</strong>Serving Prince George's County drivers, families, and dealership partners since day one.</div>
+    <div class="about-item"><strong>Independent agency</strong>We're not tied to one insurance company — we shop multiple carriers to find the right fit and price for you.</div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section wrap" id="contact">
+  <div class="section-head">
+    <span class="eyebrow">Visit or reach out</span>
+    <h2>Contact</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div><span class="k">Address</span>5639 Annapolis Rd, Bladensburg, MD 20710 <span style="color:#a39a8d; font-size:12.5px;">— off the 295 Parkway exit toward Bladensburg on MD-450/Annapolis Rd, across from the Exxon</span></div>
+      <div><span class="k">Phone</span><a href="tel:+13016993344" style="text-decoration:none; color:inherit;">(301) 699-3344</a></div>
+      <div><span class="k">Email</span><a href="mailto:info@ciatat.com" style="text-decoration:none; color:inherit;">info@ciatat.com</a></div>
+      <div><span class="k">Hours</span>Monday–Friday 9:00 AM–5:00 PM, Saturday 10:00 AM–2:00 PM</div>
+    </div>
+    <iframe class="map-box" style="border:1px solid var(--line); padding:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=5639+Annapolis+Rd,+Bladensburg,+MD+20710&output=embed"
+      title="Map of 5639 Annapolis Rd, Bladensburg, MD 20710"></iframe>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="#services">Insurance</a>
+        <a href="#services">Tags &amp; Title</a>
+        <a href="#dealers">Dealership partnerships</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Prototype tools</h4>
+        <a onclick="openAdmin()">Staff sign-in</a>
+        <span>Inquiry collection only. Payments and document uploads are not available here.</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Classic Insurance Agency &amp; Tags and Title — test site — please use fictional details only.</span>
+      <span>Licensed through MIA (insurance) &amp; MVA (title services).</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FLOATING CHAT LAUNCHER ===================== -->
+<button class="fab" onclick="openDrawer()" aria-label="Open chat">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  Chat with us
+</button>
+
+<!-- ===================== AGENT DRAWER ===================== -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<aside class="agent-drawer" id="agentDrawer">
+  <div class="drawer-header">
+    <span>Classic Assistant</span>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body">
+
+    <div id="drawerHome" class="view active">
+      <p style="color:#5b5349; margin-top:0;">What can we help with today?</p>
+      <button class="picker-btn" onclick="openServiceModal('insurance')"><span>Insurance</span><span class="arrow">→</span></button>
+      <button class="picker-btn" onclick="openServiceModal('tags')"><span>Tags &amp; Title</span><span class="arrow">→</span></button>
+    </div>
+
+    <div id="chatScreen" class="view">
+      <div class="stepper">
+        <div class="step done">1 · Chat</div>
+        <div class="step">2 · Onboard</div>
+        
+        <div class="step">3 · Done</div>
+      </div>
+      <div class="chat-header">
+        <button class="back-btn" onclick="showView('drawerHome')">← Back</button>
+        <span id="sectionBadge" class="section-badge"></span>
+      </div>
+      <div class="disclaimer" id="disclaimerText"></div>
+      <div class="chat-window">
+        <div class="messages" id="messages"></div>
+        <div class="input-row">
+          <input id="userInput" type="text" placeholder="Type your message…" onkeypress="if(event.key==='Enter')sendMessage()">
+          <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+      <div id="leadCard">
+        <h4>Captured for your agent</h4>
+        <div id="leadFields"></div>
+        <div class="btn-row">
+          <button class="btn" id="saveLeadBtn" onclick="handleSaveLead()">Send inquiry</button>
+          <span class="note-ok" id="savedNote" style="display:none;">✓ Saved</span>
+          <button class="btn ghost" id="continueBtn" style="display:none;" onclick="showView('onboarding')">Continue →</button>
+        </div>
+        <div id="saveError" style="display:none; margin-top:8px; font-size:12.5px; color:#b3452c;"></div>
+      </div>
+    </div>
+
+    <div id="onboarding" class="view">
+      <div class="stepper">
+        <div class="step done">1 · Chat</div>
+        <div class="step active">2 · Onboard</div>
+        
+        <div class="step">3 · Done</div>
+      </div>
+      <h3 style="margin-top:0;">A few things to get ready</h3>
+      <p style="color:#5b5349; font-size:14px;">Check off what you already have.</p>
+      <div class="checklist" id="checklistBox"></div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="showView('chatScreen')">← Back</button>
+        <button class="btn" onclick="submitOnboarding()">Finish →</button>
+      </div>
+    </div>
+
+    <div id="done" class="view">
+      <div class="stepper">
+        <div class="step done">1 · Chat</div>
+        <div class="step done">2 · Onboard</div>
+        
+        <div class="step active">3 · Done</div>
+      </div>
+      <h3 style="margin-top:0;">Your inquiry is saved</h3>
+      <p style="color:#5b5349; font-size:14px;">A licensed agent will follow up within one business day. On file:</p>
+      <div id="doneSummary" style="background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:13.5px; line-height:1.7;"></div>
+      <div class="btn-row"><button class="btn" onclick="resetAll()">Start another request</button></div>
+    </div>
+
+  </div>
+</aside>
+
+<!-- ===================== SERVICE PICKER MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target.id==='modalOverlay')closeServiceModal();">
+  <div class="modal-box" id="serviceModal">
+    <h3 id="modalTitle">Select a service</h3>
+    <p class="modal-sub" id="modalSub">Choose what you need — we'll jump straight to the right questions.</p>
+    <div id="serviceOptions"></div>
+    <button class="modal-close" onclick="closeServiceModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+/* ================= nav behavior ================= */
+function toggleNav(){
+  const links = document.getElementById('navLinks');
+  const btn = document.getElementById('navToggle');
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+document.getElementById('navLinks').addEventListener('click', (e) => {
+  if(e.target.tagName === 'A'){
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').setAttribute('aria-expanded', 'false');
+  }
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('siteNav').classList.toggle('scrolled', window.scrollY > 8);
+});
+['dName','dContact','dPhone','dEmail'].forEach(id => {
+  document.getElementById(id).addEventListener('input', (e) => e.target.classList.remove('invalid'));
+});
+
+/* ================= drawer control ================= */
+function openDrawer(){
+  document.getElementById('agentDrawer').classList.add('open');
+  document.getElementById('drawerBackdrop').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('agentDrawer').classList.remove('open');
+  document.getElementById('drawerBackdrop').classList.remove('open');
+}
+function startFlow(section){
+  openDrawer();
+  openServiceModal(section);
+}
+function showView(id){
+  document.querySelectorAll('.agent-drawer .view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ================= service picker modal ================= */
+const SERVICES = {
+  insurance: [
+    { label:"Auto insurance", msg:"I need auto insurance." },
+    { label:"Commercial insurance", msg:"I need commercial insurance." },
+    { label:"Home or rental insurance", msg:"I need home or renters insurance." },
+    { label:"Life insurance", msg:"I need life insurance." },
+    { label:"Something else", msg:"I'm not sure yet — I need help figuring out what insurance I need." }
+  ],
+  tags: [
+    { label:"New vehicle registration", msg:"I need to register a new vehicle." },
+    { label:"Title transfer", msg:"I need to transfer a title." },
+    { label:"Tag renewal", msg:"I need to renew my tags." },
+    { label:"Duplicate title or registration", msg:"I lost or damaged my title or registration and need a duplicate." },
+    { label:"Dealer titling", msg:"I'm a dealer and need help with titling." },
+    { label:"Something else", msg:"I'm not sure yet — I need help figuring out what I need at the tag and title window." }
+  ]
+};
+const MODAL_COPY = {
+  insurance: { title:"What kind of insurance?", sub:"Pick one and we'll start there — you can add more later." },
+  tags: { title:"What do you need at the window?", sub:"Pick one and we'll ask exactly what's needed for it." }
+};
+
+function openServiceModal(section){
+  const box = document.getElementById('serviceOptions');
+  document.getElementById('modalTitle').textContent = MODAL_COPY[section].title;
+  document.getElementById('modalSub').textContent = MODAL_COPY[section].sub;
+  box.innerHTML = '';
+  SERVICES[section].forEach(svc => {
+    const btn = document.createElement('button');
+    btn.className = svc.label === 'Something else' ? 'service-option muted' : 'service-option';
+    btn.innerHTML = `<span>${svc.label}</span><span>→</span>`;
+    btn.onclick = () => { closeServiceModal(); openDrawer(); openChat(section, svc.msg); };
+    box.appendChild(btn);
+  });
+  document.getElementById('modalOverlay').classList.add('active');
+  const first = box.querySelector('.service-option'); if(first) first.focus();
+}
+function closeServiceModal(){ document.getElementById('modalOverlay').classList.remove('active'); }
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    if(document.getElementById('modalOverlay').classList.contains('active')) closeServiceModal();
+    if(document.getElementById('adminOverlay').classList.contains('active')) closeAdmin();
+  }
+});
+
+/* ================= chat / agent logic ================= */
+let currentSection = null;
+let history = [];
+let pendingLead = null;
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+// The website and API are served from the same Render service.
+async function saveLeadRecord(rec){
+  if(rec._remoteId) return {ok:true};
+  try {
+    rec._submissionId = rec._submissionId || crypto.randomUUID();
+    const res = await fetch('/public/leads', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({type:rec.type,fields:rec.fields,submissionId:rec._submissionId})
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Request failed');
+    rec._remoteId=data.id;
+    return {ok:true};
+  } catch(error){ return {ok:false,error:error.message}; }
+}
+const DISCLAIMERS = {
+  insurance: "Prototype: this agent collects information for a quote. It does not calculate real premiums or bind coverage — a licensed agent follows up with actual pricing.",
+  tags: "Prototype: this agent collects information to prepare your paperwork. Some steps require an in-person visit or notarization and can't be completed here."
+};
+
+function openChat(section, presetMessage){
+  currentSection = section; history = []; pendingLead = null;
+  document.getElementById('chatScreen').className = 'view active ' + section;
+  document.getElementById('sectionBadge').textContent = section === 'insurance' ? 'Insurance' : 'Tags & Title';
+  document.getElementById('sectionBadge').className = 'section-badge ' + section;
+  document.getElementById('disclaimerText').textContent = DISCLAIMERS[section];
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('leadCard').style.display = 'none';
+  document.getElementById('savedNote').style.display = 'none';
+  document.getElementById('continueBtn').style.display = 'none';
+  document.getElementById('saveError').style.display = 'none';
+  document.getElementById('saveLeadBtn').disabled = false;
+  showView('chatScreen');
+  addMessage('user', presetMessage);
+  history.push({role:'user', content: presetMessage});
+  requestAgentTurn();
+}
+function addMessage(role, text){
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'agent');
+  div.textContent = text;
+  document.getElementById('messages').appendChild(div);
+  const m = document.getElementById('messages'); m.scrollTop = m.scrollHeight;
+}
+function addFailureMessage(text){
+  const div = document.createElement('div'); div.className = 'msg agent';
+  const span = document.createElement('div'); span.textContent = text;
+  const retry = document.createElement('button'); retry.textContent = 'Retry'; retry.className = 'btn ghost';
+  retry.style.marginTop = '8px'; retry.style.fontSize = '12.5px';
+  retry.onclick = () => { div.remove(); requestAgentTurn(); };
+  div.appendChild(span); div.appendChild(retry);
+  document.getElementById('messages').appendChild(div);
+  const m = document.getElementById('messages'); m.scrollTop = m.scrollHeight;
+}
+function setTyping(on){
+  let el = document.getElementById('typingIndicator');
+  if(on && !el){ el = document.createElement('div'); el.id='typingIndicator'; el.className='typing'; el.textContent='Agent is typing…'; document.getElementById('messages').appendChild(el); const m=document.getElementById('messages'); m.scrollTop=m.scrollHeight; }
+  else if(!on && el){ el.remove(); }
+}
+async function requestAgentTurn(){
+  document.getElementById('sendBtn').disabled = true;
+  setTyping(true);
+  let response, data;
+  try{
+    response = await fetch("/public/chat", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({section:currentSection,messages:history})
+    });
+  }catch(networkErr){
+    setTyping(false);
+    console.error('[agent-turn] fetch threw', networkErr);
+    addFailureMessage('Could not reach the agent (network error).');
+    document.getElementById('sendBtn').disabled = false; return;
+  }
+  if(!response.ok){
+    let bodyText=''; try{ bodyText = await response.text(); }catch(e){}
+    setTyping(false);
+    console.error('[agent-turn] request failed', response.status);
+    let detail; try { detail=JSON.parse(bodyText).error; } catch {}
+    addFailureMessage(detail || 'The assistant is unavailable. Please call the office.');
+    document.getElementById('sendBtn').disabled = false; return;
+  }
+  try{ data = await response.json(); }
+  catch(parseErr){
+    setTyping(false); console.error('[agent-turn] json parse failed', parseErr);
+    addFailureMessage('Got an unreadable response.');
+    document.getElementById('sendBtn').disabled = false; return;
+  }
+  setTyping(false);
+  if(data && data.type === 'error'){
+    console.error('[agent-turn] API error payload', data);
+    addFailureMessage('Agent error: ' + (data.error && data.error.message ? data.error.message : 'unknown'));
+    document.getElementById('sendBtn').disabled = false; return;
+  }
+  try{
+    let raw = (data.content || []).map(b => b.text || '').join('\n');
+    const match = raw.match(/```lead-summary\s*([\s\S]*?)```/);
+    let visibleText = raw;
+    if(match){
+      visibleText = raw.replace(match[0], '').trim();
+      try{ const parsed = JSON.parse(match[1].trim()); pendingLead = { id:uid(), type:parsed.type, fields:parsed.fields||{}, stage:'new', createdAt:Date.now() }; renderLeadCard(pendingLead); }
+      catch(e){ console.error('[agent-turn] lead-summary parse failed', e); }
+    }
+    addMessage('agent', visibleText || "Thanks — let me get that noted.");
+    history.push({role:'assistant', content: raw});
+  }catch(renderErr){ console.error('[agent-turn] render failed', renderErr); addFailureMessage('Got a reply but could not display it.'); }
+  document.getElementById('sendBtn').disabled = false;
+}
+async function sendMessage(){
+  const input = document.getElementById('userInput');
+  const text = input.value.trim(); if(!text) return;
+  input.value = '';
+  addMessage('user', text); history.push({role:'user', content: text});
+  await requestAgentTurn();
+}
+function escapeHtml(value){ const node=document.createElement('span'); node.textContent=String(value); return node.innerHTML; }
+function renderLeadCard(lead){
+  const labelMap = { insurance_type:"Insurance type", details:"Details", current_coverage:"Current coverage", request_type:"Request type", vehicle:"Vehicle", lienholder:"Lienholder", name:"Name", phone:"Phone", email:"Email" };
+  const container = document.getElementById('leadFields'); container.innerHTML = '';
+  Object.keys(lead.fields).forEach(k => { if(!lead.fields[k]) return; const row = document.createElement('div'); row.innerHTML = `<span class="k">${escapeHtml(labelMap[k]||k)}</span><span>${escapeHtml(lead.fields[k])}</span>`; container.appendChild(row); });
+  document.getElementById('leadCard').style.display = 'block';
+  document.getElementById('savedNote').style.display = 'none';
+  document.getElementById('continueBtn').style.display = 'none';
+  document.getElementById('saveLeadBtn').disabled = false;
+}
+async function handleSaveLead(){
+  if(!pendingLead) return;
+  document.getElementById('saveLeadBtn').disabled = true;
+  document.getElementById('saveError').style.display = 'none';
+  const result = await saveLeadRecord(pendingLead);
+  if(result.ok){ document.getElementById('savedNote').style.display='inline'; document.getElementById('continueBtn').style.display='inline-block'; buildChecklist(); return; }
+  document.getElementById('saveLeadBtn').disabled = false;
+  const errBox = document.getElementById('saveError'); errBox.style.display='block';
+  errBox.textContent = 'Not saved. Please retry: '+result.error;
+}
+const CHECKLISTS = {
+  insurance: ["Driver's license (photo)", "Current insurance card, if you have one", "Vehicle registration, if insuring a vehicle", "Recent utility bill or lease, if insuring a home or rental", "Business license or entity info, if insuring commercial"],
+  tags_title: ["Certificate of title or Manufacturer's Statement of Origin", "Bill of sale", "Lien release, if applicable", "Government-issued photo ID"]
+};
+function buildChecklist(){
+  const box = document.getElementById('checklistBox'); box.innerHTML = '';
+  (CHECKLISTS[pendingLead.type] || []).forEach((item, i) => { const label = document.createElement('label'); label.innerHTML = `<input type="checkbox" id="chk${i}"> <span>${item}</span>`; box.appendChild(label); });
+}
+function submitOnboarding(){
+  if(!pendingLead || !pendingLead._remoteId) return;
+  document.getElementById('doneSummary').textContent = 'Your inquiry has been saved. Keep your documents ready for staff. No documents or payments have been submitted here.';
+  showView('done');
+}
+function resetAll(){ pendingLead = null; currentSection = null; history = []; showView('drawerHome'); }
+
+/* ================= dealership form (on-page, not in drawer) ================= */
+function validateDealerForm(){
+  const requiredIds = ['dName','dContact','dPhone','dEmail']; let firstInvalid = null;
+  requiredIds.forEach(id => { const el = document.getElementById(id); const bad = !el.value.trim(); el.classList.toggle('invalid', bad); if(bad && !firstInvalid) firstInvalid = el; });
+  const emailEl = document.getElementById('dEmail'); const emailVal = emailEl.value.trim();
+  if(emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)){ emailEl.classList.add('invalid'); if(!firstInvalid) firstInvalid = emailEl; }
+  if(firstInvalid){ firstInvalid.focus(); return false; }
+  return true;
+}
+let dealerAttempt = null;
+async function submitDealer(){
+  document.getElementById('dealerError').style.display = 'none';
+  if(!validateDealerForm()){ const errBox = document.getElementById('dealerError'); errBox.style.display='block'; errBox.textContent='Please fill in dealership name, contact name, phone, and a valid email before sending.'; return; }
+  const submitBtn = document.querySelector('#dealers .pill-btn.brass'); submitBtn.disabled = true;
+  const rec = { id: uid(), type:'dealership', stage:'new', createdAt: Date.now(), fields:{
+    name: document.getElementById('dContact').value.trim(), dealership: document.getElementById('dName').value.trim(),
+    phone: document.getElementById('dPhone').value.trim(), email: document.getElementById('dEmail').value.trim(),
+    volume: document.getElementById('dVolume').value, message: document.getElementById('dMessage').value.trim()
+  }};
+  const fingerprint=JSON.stringify(rec.fields);
+  if(dealerAttempt?.fingerprint === fingerprint) rec._submissionId=dealerAttempt.id;
+  else dealerAttempt={fingerprint,id:crypto.randomUUID()};
+  rec._submissionId=dealerAttempt.id;
+  const result = await saveLeadRecord(rec);
+  submitBtn.disabled = false;
+  document.getElementById('dealerSent').style.display = result.ok ? 'block' : 'none';
+  const errBox = document.getElementById('dealerError');
+  if(!result.ok){ errBox.style.display='block'; errBox.textContent = 'Not saved. Please retry: '+result.error; }
+  else{ errBox.style.display='none'; }
+}
+
+function openAdmin(){ window.location.assign('/staff'); }
+</script>
+</body>
+</html>

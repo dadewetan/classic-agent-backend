@@ -40,3 +40,9 @@ create table if not exists lead_messages (
 );
 
 create index if not exists idx_lead_messages_lead_id on lead_messages(lead_id);
+
+-- Retry-safe public inquiry submissions; token is never exposed by list APIs.
+create table if not exists public_submissions (
+  submission_id uuid primary key,
+  lead_id uuid not null references leads(id) on delete cascade
+);
